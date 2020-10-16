@@ -36,4 +36,4 @@ Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main c
 
 #NOTE: The parallel computing platform we used in the paper is MPICH-3.3.2 which can be downloaded from https://www.mpich.org/.
 
-#NOTE: In the directory "Code for Section 7.2", while implementing different procedures, we basically use C++ and in each procedure, we highlight the parameters that should be changed from one problem instance to another by commenting the parameter by "Input Parameter:..."
+#NOTE: In the directory "Code for Section 7.2", while implementing different procedures, we highlight the parameters that should be changed from one problem instance to another by commenting the parameter by "Input Parameter:..."
