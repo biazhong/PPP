@@ -131,35 +131,7 @@ public class Paulson {
 		}
 	}
 	
-/**	protected void varianceCalculation1(double[] S1, double[][] X, double[] sampleMean) {
-		int k = S1.length;
-		int nSamples = X.length;
-		
-		for(int i = 0 ; i < k ; i++) {
-			for (int count = 0 ; count < nSamples; count++) {
-				S1[i] = S1[i] + Math.pow((X[count][i]-sampleMean[i]), 2.0);
-			}
-			S1[i]=S1[i]/(nSamples-1);
-			//System.out.println(S[i]);
-		}
-	}
-	
-	
-	protected void corCalculation(double[][]COR,double[] S1, double[][] X, double[] sampleMean) {
-		int k = COR.length;
-		int nSamples = X.length;
-		for(int i = 0 ; i < k ; i++) {
-			for(int j = i; j < k; j++) {
-				for (int count = 0 ; count < nSamples; count++) {
-					COR[i][j] = COR[i][j] + (X[count][i]-sampleMean[i])*(X[count][j]-sampleMean[j]);
-				}
-				COR[i][j] =COR[i][j]/((nSamples-1)*Math.pow(S1[i]*S1[j], 0.5));
-				COR[j][i]=COR[i][j];
-				System.out.println(COR[i][j]);
-			}
-		}
-		
-	}**/
+
 	protected void updateSampleMean(int t, ArrayList<Integer> I, ArrayList<Double> mu, double[] sampleMean) {
 		for(int i = 0; i < I.size(); i++) {
 			sampleMean[I.get(i)] = (sampleMean[I.get(i)] * t + R.nextGaussian()*sigma + mu.get(I.get(i)))/(t+1);
