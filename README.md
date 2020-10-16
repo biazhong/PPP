@@ -1,4 +1,8 @@
 # PPP
+\begin{itemized}
+\item[]Directory "Code for Section 7.1" contains all the java code that is used to conduct the numerical experiments listed in Section 7.1 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main class to run the experiments related to the KN procedure, the PPP proceudre and the Paulson's procedure respectively.
+\end{itemized}
+
 Directory "Code for Section 7.1" contains all the java code that is used to conduct the numerical experiments listed in Section 7.1 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main class to run the experiments related to the KN procedure, the PPP proceudre and the Paulson's procedure respectively.
 
 Directory "Code for Section 7.2" contains all the code that is used to conduct the numerical experiments listed in Section 7.2 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing".
