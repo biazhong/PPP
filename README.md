@@ -29,4 +29,4 @@ NOTE: The parallel computing platform we used in the paper is MPICH-3.3.2 which 
 NOTE: In the directory "Code for Section 7.2", while implementing different procedures, we basically use C++ and in each procedure, we highlight the parameters that should be changed from one problem instance by another by commenting the parameter by "Input Parameter:..."
 
 
-The csv file "Numerical Results.csv" contains all the numerical results for the experiments we have conducted for the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". It includes the exact numerical results for the experiments whose results are displayed in figures.
+The csv file "Numerical Results.csv" contains all the numerical results for the experiments we have conducted for the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". Besides the results listed in the form of tables, it includes the exact numerical results for the experiments whose results are displayed in figures.
