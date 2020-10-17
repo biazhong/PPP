@@ -3,7 +3,7 @@
 
 
 
----Directory "Code for Section 7.1" contains all the java code that is used to conduct the numerical experiments listed in Section 7.1 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". 
+---Directory "Code for Section 7.1" contains all the Java code that is used to conduct the numerical experiments listed in Section 7.1 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". 
 
 Files KN.java, ModifiedPaulson.java, and Paulson.java are the classes that implement the KN procedure, the PPP procedure, and the Paulson's procedure respectively in Section 7.1.
 
@@ -11,9 +11,9 @@ Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main c
 
 ---Directory "Code for Section 7.2" contains all the code that is used to conduct the numerical experiments listed in Section 7.2 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing".
   
-  File EtaFunc.java is the java code that can be used to calculate the parameter eta used in the GSP procedure;
+  File EtaFunc.java is the Java code that can be used to calculate the parameter eta used in the GSP procedure;
   
-  File Rinott.java is the java code that can be used to calculate the Rinott's constant used in the GSP procedure;
+  File Rinott.java is the Java code that can be used to calculate the Rinott's constant used in the GSP procedure;
   
   File GSP.cpp is the C++ code that is used to conduct the experiments related to the GSP procedure in Section 7.2;
   
