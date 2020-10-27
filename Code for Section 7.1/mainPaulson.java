@@ -1,3 +1,5 @@
+//This is the main file to run expertiments related to Paulson's procedure in Section 7.1 
+
 package comparePaulsonandModifiedPaulson;
 import java.util.ArrayList;
 public class mainPaulson {
