@@ -1,9 +1,9 @@
 //
 //  GSP.cpp
-// This code implements the GSP of Ni et al.（2017） in MPI.
-// The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
-// The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.
-// The parameter eta could be calculated by EtaFunc.java and Rinott's constant can be calculated by Rinott.java
+/**This code implements the GSP of Ni et al.（2017） in MPI.
+The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
+The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.
+The parameter eta could be calculated by EtaFunc.java and Rinott's constant can be calculated by Rinott.java**/
 //
 //  
 //
@@ -33,7 +33,9 @@ double exprand(double lambda){
 }
 
 
-//struct that contains information of an alternative
+/**
+struct that contains information of an alternative
+**/
 typedef struct{
     int label;
     int batchsize;
@@ -44,12 +46,16 @@ typedef struct{
     
 } alt;
 
-//method used by the master to send out tasks to workers
+/**
+method used by the master to send out tasks to workers
+**/
 void master_send_out_tasks(vector<alt>* outgoing_alts, int outgoing_rank){
     MPI_Send((void*)outgoing_alts->data(),outgoing_alts->size()*sizeof(alt), MPI_BYTE, outgoing_rank, 0, MPI_COMM_WORLD);
 }
 
-//method used by the master to receive tasks from workers
+/**
+method used by the master to receive tasks from workers
+**/
 void master_receive_tasks(vector<alt>* incoming_alts, int* incoming_rank){
     MPI_Status status;
     int incoming_size;
@@ -63,12 +69,16 @@ void master_receive_tasks(vector<alt>* incoming_alts, int* incoming_rank){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,*incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
-//method used by workers to send out tasks to the master
+/**
+method used by workers to send out tasks to the master
+**/
 void worker_send_out_tasks(vector<alt>* outgoing_alts){
     MPI_Send((void*)outgoing_alts->data(), outgoing_alts->size()*sizeof(alt), MPI_BYTE, 0, 0 ,MPI_COMM_WORLD);
 }
 
-//method used by workers to receive tasks from the master
+/**
+method used by workers to receive tasks from the master
+**/
 void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank = 0;
@@ -82,7 +92,9 @@ void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
-//method used to generate observations for the three-stage buffer allocation problem.
+/**
+method used to generate observations for the three-stage buffer allocation problem.
+**/
 void generate_obv (double* _sim, int label){
     int RB = 128;   //Input Parameter: Problem parameter
     vector<int> x_disc(5);
@@ -164,7 +176,9 @@ void generate_obv (double* _sim, int label){
     *_sim = ((double)(_njobs-_burnin))/(eTime[_nstages-1][_njobs]-eTime[_nstages-1][_burnin]);
 }
 
-//main method
+/**
+main method
+**/
 int main(int argc, char** argv){
 
     MPI_Init(NULL,NULL);
@@ -176,12 +190,12 @@ int main(int argc, char** argv){
     int world_rank;
     MPI_Comm_rank(MPI_COMM_WORLD, &world_rank);
     for(int count1 = 0; count1 < repeat; count1++){
-    int k = 1016127; //Input Parameter: Total number of alternatives
+    int k = 1016127; //Input Parameter: Total number of alternatives /3249/57624/1016127
     int n0 = 50; //Input Parameter: First stage sample size
     double alpha = 0.05; //Input Parameter: Desired PAC
     double delta = 0.1; //Input Parameter: The IZ parameter delta
-    int beta = 200;     //Input Parameter: Parameter beta for GSP
-    int maxR = 5;       //Input Parameter: Parameter rbar for GSP
+    int beta = 200;     //Input Parameter: Parameter beta for GSP /100/200
+    int maxR = 5;       //Input Parameter: Parameter rbar for GSP	/5/10
     int bestsys;
     int r = 0;
     double eta = 0.9744071960449219;    //Input Parameter: Parameter eta used for constructing the continuation region. NOTE: For different problems one should use EtaFunc.java to calculate eta values.
@@ -465,11 +479,7 @@ int main(int argc, char** argv){
                     outgoing_alts.push_back(I[_record_surviving[j]]);
                 }
                 
-                /**for(int j = 0; j < _record_surviving.size(); j++){
-                    if(j% world_size==0){
-                        outgoing_alts.push_back(I[_record_surviving[j]]);
-                    }
-                }**/
+               
                 
                 _record_surviving.clear();
                 _tt = MPI_Wtime();
@@ -505,14 +515,7 @@ int main(int argc, char** argv){
                 for(int i = 0; i < world_size-1; i++){
                     MPI_Send(&num_of_surviving,1, MPI_INT, i+1, 0, MPI_COMM_WORLD);
                 }
-		/**if(r==maxR-1){
-			double firstStageSampleSize = 0.0;
-			
-			for(int u=0; u < num_of_surviving; u++){
-				firstStageSampleSize = firstStageSampleSize + I[_record_surviving[u]].sampleSize;			
-			}
-			printf("r=%d, Number of surviving alt is:%d and FirstStageSampleSize:%f\n",r+1,num_of_surviving,firstStageSampleSize);
-		}**/
+		
             }
         }else{
             if(num_of_surviving > world_size){
