@@ -13,6 +13,7 @@ public class mainKN {
 			double sumCPUTime = 0d;
 			int sumCorrectness=0,sumSampleSize=0;
 			for(int j = 0 ; j < repeatTime; j++) {
+				//Input Parameters: k n_0 delta lambda alpha
 				KN y = new KN(k,50,0.1,0.05,0.05);
 				long startTime = System.currentTimeMillis();
 				ArrayList<Integer> RESULT = new ArrayList<Integer>(y.getResult());
