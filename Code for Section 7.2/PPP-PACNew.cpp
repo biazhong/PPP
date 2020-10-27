@@ -77,8 +77,9 @@ void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
+//method used to generate obseravtions for the three-stage buffer allocation problem. 
 void generate_obv (double* _sim, int label){
-    int RB = 128;   //Input Parameter: Problem parameter
+    int RB = 128;   //Input Parameter: Problem parameter 20/50/128
     vector<int> x_disc(5);
     int rr = RB * 2 - 3;
     int n = label/(RB-1)+1;
@@ -158,7 +159,7 @@ void generate_obv (double* _sim, int label){
 
 //main method
 int main(int argc, char** argv){
-    int k = 1016127;    //Input Parameter: Total number of alternatives
+    int k = 1016127;    //Input Parameter: Total number of alternatives 3249/57624/1016127
     int n0 = 50;    //Input Parameter: First-stage sample size
     double alpha = 0.05;    //Input Parameter: Desired PAC
     double delta = 0.1;     //Input Parameter: IZ parameter delta
