@@ -2,7 +2,9 @@
 //  PSS.cpp
 //
 //
-//  
+// This code implements the PSS procedure in MPI.
+// The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
+// The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another. 
 //
 
 #include <iostream>
