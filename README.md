@@ -28,7 +28,7 @@ Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main c
   
   File \_batchingc++RandomSleepTime.cpp is the C++ code used to conducted the experiment related to the batching method in Table 2;
   
-  File \_onebyonec++RandomSleepTime.cpp is the C++ code used to conducted the experiment related to the batching method in Table 2;
+  File \_onebyonec++RandomSleepTime.cpp is the C++ code used to conducted the experiment related to the one-by-one method in Table 2;
 
 
 ---The csv file "Numerical Results.csv" contains all the numerical results for the experiments we have conducted for the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". Besides the results listed in the form of tables, it includes the exact numerical results for the experiments whose results are displayed in figures.
