@@ -2,9 +2,11 @@
 //  PSS.cpp
 //
 //
-// This code implements the PSS procedure in MPI.
-// The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
-// The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another. 
+/**
+This code implements the PSS procedure in MPI.
+The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
+The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another. 
+**/
 //
 
 #include <iostream>
@@ -38,13 +40,17 @@ typedef struct{
     double budget;
 } alt;
 
-//method used by the master to send out the first batch of tasks to workers
+/**
+method used by the master to send out the first batch of tasks to workers
+**/
 void master_send_out_tasks(vector<alt>* outgoing_alts, int outgoing_rank){
     MPI_Send((void*)outgoing_alts->data(),outgoing_alts->size()*sizeof(alt), MPI_BYTE, outgoing_rank, 0, MPI_COMM_WORLD);
 }
 
 
-//method used by the master to receive tasks from workers
+/**
+method used by the master to receive tasks from workers
+**/
 void master_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank;
@@ -58,7 +64,10 @@ void master_receive_tasks(vector<alt>* incoming_alts){
     
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
-//method used by the master to send out remaining tasks to workers 
+
+/**
+method used by the master to send out remaining tasks to workers 
+**/
 void master_receive_tasks_main(vector<alt>* incoming_alts, int* outgoing_rank){
     MPI_Status status;
     int incoming_rank;
@@ -74,12 +83,16 @@ void master_receive_tasks_main(vector<alt>* incoming_alts, int* outgoing_rank){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
-//method used by workers to send out tasks to the master
+/**
+method used by workers to send out tasks to the master
+**/
 void worker_send_out_tasks(vector<alt>* outgoing_alts){
     MPI_Send((void*)outgoing_alts->data(), outgoing_alts->size()*sizeof(alt), MPI_BYTE, 0, 0 ,MPI_COMM_WORLD);
 }
 
-//method used by workers to receive tasks from the master
+/**
+method used by workers to receive tasks from the master
+**/
 void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank = 0;
@@ -92,7 +105,9 @@ void worker_receive_tasks(vector<alt>* incoming_alts){
     
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
-//method used to generate observations for the three-stage buffer allocation problem
+/**
+method used to generate observations for the three-stage buffer allocation problem
+**/
 void generate_obv (double* _sim, int label){
     int RB = 20;    //Input Parameter: Problem parameter 20/50/128
     vector<int> x_disc(5);
@@ -172,15 +187,18 @@ void generate_obv (double* _sim, int label){
     *_sim = ((double)(_njobs-_burnin))/(eTime[_nstages-1][_njobs]-eTime[_nstages-1][_burnin]);
 }
 
+/**
+main method
+**/
 int main(int argc, char** argv){
-	int k = 3249;
+	int k = 3249;	/3249/57624/1016127
 	double ref_mu=5.776121751463529; //Input Parameter: Highest mu
 	int n0 = 50;    //Input Parameter: First-stage sample size
 	double alpha = 0.05;    //Input Parameter: Desired PAC
 	double delta = 0.1;     //Input Parameter: IZ parameter delta
 	double budget = 410000; //Input Parameter: Total sample size
 	double c=4.35;          //Input Parameter: Constant c used to construct continuation regions. NOTE: For different problems, the value of c could be different.
-	double batch = 10;
+	double batch = 10;	//Input Parameter: /10/20
     
 	int _survivingK = k;
 	int t = n0;
