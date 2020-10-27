@@ -1,6 +1,9 @@
 //
 //  GSP.cpp
-//  The parameter eta could be calculated by EtaFunc.java and Rinott's constant can be calculated by Rinott.java
+// This code implements the GSP of Ni et al.（2017） in MPI.
+// The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
+// The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.
+// The parameter eta could be calculated by EtaFunc.java and Rinott's constant can be calculated by Rinott.java
 //
 //  
 //
