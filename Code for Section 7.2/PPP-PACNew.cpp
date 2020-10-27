@@ -3,7 +3,7 @@
 // This code implements the PPP in MPI.
 // The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
 // The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.
-// While generating observations, no pause time is considered in code.
+// While generating observations, no pause time is considered in this code.
 //  
 //
 
