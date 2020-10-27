@@ -1,9 +1,11 @@
 //
 //  VKN.cpp
 //  
-// This code implements the VKN procedure in MPI.
-// The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
-// The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.  
+/**
+This code implements the VKN procedure in MPI.
+The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
+The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another.  
+**/
 //
 
 #include <iostream>
@@ -18,7 +20,9 @@
 
 using namespace std;
 
-//method used to generate exponential random variables
+/**
+method used to generate exponential random variables
+**/
 double exprand(double lambda){
     double u;
     
@@ -27,20 +31,26 @@ double exprand(double lambda){
     return -log(1- u) / lambda;
 }
 
-//struct that contains all the information of an alternative
+/**
+struct that contains all the information of an alternative
+**/
 typedef struct{
     int label;
     int position;
     double sim_obv;
 } alt;
 
-//method used by the master to send out tasks to workers
+/**
+method used by the master to send out tasks to workers
+**/
 void master_send_out_tasks(vector<alt>* outgoing_alts, int outgoing_rank){
     MPI_Send((void*)outgoing_alts->data(),outgoing_alts->size()*sizeof(alt), MPI_BYTE, outgoing_rank, 0, MPI_COMM_WORLD);
 }
 
 
-//method used by the master to receive tasks from workers
+/**
+method used by the master to receive tasks from workers
+**/
 void master_receive_tasks(vector<alt>* incoming_alts, int* incoming_rank){
     MPI_Status status;
     int incoming_size;
@@ -56,12 +66,16 @@ void master_receive_tasks(vector<alt>* incoming_alts, int* incoming_rank){
 
 
 
-//method used by workers to send out tasks to the master
+/**
+method used by workers to send out tasks to the master
+**/
 void worker_send_out_tasks(vector<alt>* outgoing_alts){
     MPI_Send((void*)outgoing_alts->data(), outgoing_alts->size()*sizeof(alt), MPI_BYTE, 0, 0 ,MPI_COMM_WORLD);
 }
 
-//method used by workers to receive tasks from the master
+/**
+method used by workers to receive tasks from the master
+**/
 void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank = 0;
@@ -75,11 +89,13 @@ void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
-//method used to generate observations for the three-stage buffer allocation problem
+/**
+method used to generate observations for the three-stage buffer allocation problem
+**/
 void generate_obv (double* _sim, int label){
     
     
-    int RB = 50;    //Input Parameter: Problem parameter 20/50/128
+    int RB = 50;    //Input Parameter: Problem parameter /20/50/128
     vector<int> x_disc(5);
     int rr = RB * 2 - 3;
     int n = label/(RB-1)+1;
@@ -157,12 +173,14 @@ void generate_obv (double* _sim, int label){
     *_sim = ((double)(_njobs-_burnin))/(eTime[_nstages-1][_njobs]-eTime[_nstages-1][_burnin]);
 }
 
-
+/**
+main method
+**/
 
 int main(int argc, char** argv){
     
     
-    int k = 57624;  //Input Parameter: Total number of alternatives 3249/57624/1016127
+    int k = 57624;  //Input Parameter: Total number of alternatives /3249/57624/1016127
     int n0 = 50;    //Input Parameter: First-stage sample size
     double alpha = 0.05;    //Input Parameter: Desired PAC
     double delta = 0.1;     //Input Parameter: IZ parameter delta
