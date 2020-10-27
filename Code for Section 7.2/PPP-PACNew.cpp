@@ -19,6 +19,7 @@
 
 using namespace std;
 
+//method used to generate exponential random variables
 double exprand(double lambda){
     double u;
     
@@ -27,7 +28,7 @@ double exprand(double lambda){
     return -log(1- u) / lambda;
 }
 
-
+//struct that contains information of an alternative
 typedef struct{
     int label;
     int sampleSize;
@@ -36,13 +37,13 @@ typedef struct{
     int batchsize;
 } alt;
 
-
+//method used by the master to send out tasks to workers
 void master_send_out_tasks(vector<alt>* outgoing_alts, int outgoing_rank){
     MPI_Send((void*)outgoing_alts->data(),outgoing_alts->size()*sizeof(alt), MPI_BYTE, outgoing_rank, 0, MPI_COMM_WORLD);
 }
 
 
-
+//method used by the master to receive tasks from workers
 void master_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank;
@@ -57,12 +58,12 @@ void master_receive_tasks(vector<alt>* incoming_alts){
     MPI_Recv((void*)incoming_alts->data(),incoming_size, MPI_BYTE,incoming_rank,0,MPI_COMM_WORLD,MPI_STATUS_IGNORE);
 }
 
-
+//method used by workers to send out tasks to the master
 void worker_send_out_tasks(vector<alt>* outgoing_alts){
     MPI_Send((void*)outgoing_alts->data(), outgoing_alts->size()*sizeof(alt), MPI_BYTE, 0, 0 ,MPI_COMM_WORLD);
 }
 
-
+//method used by workers to receive tasks from the master
 void worker_receive_tasks(vector<alt>* incoming_alts){
     MPI_Status status;
     int incoming_rank = 0;
@@ -155,6 +156,7 @@ void generate_obv (double* _sim, int label){
     *_sim = ((double)(_njobs-_burnin))/(eTime[_nstages-1][_njobs]-eTime[_nstages-1][_burnin]);
 }
 
+//main method
 int main(int argc, char** argv){
     int k = 1016127;    //Input Parameter: Total number of alternatives
     int n0 = 50;    //Input Parameter: First-stage sample size
