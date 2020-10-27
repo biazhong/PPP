@@ -1,6 +1,5 @@
 # PPP
-
-
+In this site, we include all the code used to conduct the numerical experiments of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problem Using Parallel Computing". In Section 7.1 of the paper, we conduct the numerical experiments in a single processor computing environment, all the code are written in Java. In Section 7.2 of the paper, we conduct the numerical experiments in different parallel computing environments, all the code are written in C++. To compile and run the Java code, one may download the integrated development environment (IDE) from https://www.eclipse.org/. To compile and run the C++ code, one may download parallel computing platform, namely MPICH-3.3.2,  we used in the paper from https://www.mpich.org/. This site also includes the tutorials on how to set up the parallel computing environments for MPI.
 
 
 ---Directory "Code for Section 7.1" contains all the Java code that is used to conduct the numerical experiments listed in Section 7.1 of the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". 
@@ -34,6 +33,6 @@ Files mainKN.java, mainModifiedPaulson.java, and mainPaulson.java are the main c
 
 ---The csv file "Numerical Results.csv" contains all the numerical results for the experiments we have conducted for the paper entitled "Speeding Up Paulson's Procedure for Large-Scale Problems Using Parallel Computing". Besides the results listed in the form of tables, it includes the exact numerical results for the experiments whose results are displayed in figures.
 
-#NOTE: The parallel computing platform we used in the paper is MPICH-3.3.2 which can be downloaded from https://www.mpich.org/.
+
 
 #NOTE: In directory "Code for Section 7.2", while implementing different procedures, we highlight the parameters that should be changed from one problem instance to another by commenting the parameter with "Input Parameter:..."
