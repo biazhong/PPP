@@ -1,6 +1,6 @@
   
-//This class implements the classical Paulson's procedure used to conduct the experiments in Section 7.1 of 
-//the paper entitled Speeding Up Paulson's Procedure for Large-Scale Problem Using Parallel Computing
+/**This class implements the classical Paulson's procedure used to conduct the experiments in Section 7.1 of 
+the paper entitled Speeding Up Paulson's Procedure for Large-Scale Problem Using Parallel Computing**/
 package comparePaulsonandModifiedPaulson;
 import java.util.ArrayList;
 import java.util.Random;
