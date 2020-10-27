@@ -1,3 +1,6 @@
+//This is the main file to run expertiments related to the KN procedure in Section 7.1 
+
+
 package comparePaulsonandModifiedPaulson;
 import java.util.ArrayList;
 public class mainKN {
