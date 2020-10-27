@@ -1,3 +1,6 @@
+//This class implement the classical KN procedure used to conduct the experiments in Section 7.1 of 
+//the paper entitled Speeding Up Paulson's Procedure for Large-Scale Problem Using Parallel Computing
+
 package comparePaulsonandModifiedPaulson;
 import java.util.ArrayList;
 import java.util.Random;
@@ -52,19 +55,12 @@ public class KN {
 		
 		double[][] S = new double[k][k];
 		
-		//double[] S1 = new double[k];
-		
-		//double[][] COR = new double[k][k];
-		
 		varianceCalculation(S, X, sampleMean);
-		//varianceCalculation1(S1,X,sampleMean);
-		//corCalculation(COR,S1,X,sampleMean);
 		
 		int t = n0;
 		while(I.size()>1) {
 			for(int i  = 0 ; i < I.size(); i++) {
 				for(int j = 0 ; j < I.size(); j++) {
-				//	if(I.get(i)!=1&t*(sampleMean[I.get(i)]-sampleMean[1])<-1d*h2*S[I.get(i)][1]+lambda*t) {
 				
 					if(i!=j & t*(sampleMean[I.get(i)]-sampleMean[I.get(j)])<-1d*h2*S[I.get(i)][I.get(j)]+lambda*t) {
 						
@@ -131,35 +127,7 @@ public class KN {
 		}
 	}
 	
-/**	protected void varianceCalculation1(double[] S1, double[][] X, double[] sampleMean) {
-		int k = S1.length;
-		int nSamples = X.length;
-		
-		for(int i = 0 ; i < k ; i++) {
-			for (int count = 0 ; count < nSamples; count++) {
-				S1[i] = S1[i] + Math.pow((X[count][i]-sampleMean[i]), 2.0);
-			}
-			S1[i]=S1[i]/(nSamples-1);
-			//System.out.println(S[i]);
-		}
-	}
-	
-	
-	protected void corCalculation(double[][]COR,double[] S1, double[][] X, double[] sampleMean) {
-		int k = COR.length;
-		int nSamples = X.length;
-		for(int i = 0 ; i < k ; i++) {
-			for(int j = i; j < k; j++) {
-				for (int count = 0 ; count < nSamples; count++) {
-					COR[i][j] = COR[i][j] + (X[count][i]-sampleMean[i])*(X[count][j]-sampleMean[j]);
-				}
-				COR[i][j] =COR[i][j]/((nSamples-1)*Math.pow(S1[i]*S1[j], 0.5));
-				COR[j][i]=COR[i][j];
-				System.out.println(COR[i][j]);
-			}
-		}
-		
-	}**/
+
 	protected void updateSampleMean(int t, ArrayList<Integer> I, ArrayList<Double> mu, double[] sampleMean) {
 		for(int i = 0; i < I.size(); i++) {
 			sampleMean[I.get(i)] = (sampleMean[I.get(i)] * t + R.nextGaussian()*sigma + mu.get(I.get(i)))/(t+1);
