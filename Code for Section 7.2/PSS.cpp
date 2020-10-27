@@ -6,6 +6,10 @@
 This code implements the PSS procedure in MPI.
 The simulation optimization problem considered in this code is the three-stage buffer allocation problem.
 The parameters follows by comments "Input Parameter:..." should be adjusted from one problem instance to another. 
+
+NOTE: Because we conduct the experiments on a single server, the communication cost among the processors is relatively low. Therefore, there is not
+much difference betweeen assigining the surviving alternatives one-by-one to the next available processor and assigning the surviving alternatives all at 
+once to the processors at each round. While implementing the procedure, we simply choosing the second way of assigning the tasks at each round.
 **/
 //
 
